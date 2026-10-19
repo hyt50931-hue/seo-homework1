@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>國立臺灣中正大學 National Chung Cheng University</title>
+    <style>
+        :root {
+            --primary-color: #0d47a1;
+            --secondary-color: #1565c0;
+            --accent-color: #ffb300;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+
+        /* 導覽列 */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero 主視覺區塊 */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            padding: 120px 20px 80px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #60a5fa, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--accent-color);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+
+        /* 內容容器 */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text-light);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Grid 佈局 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        .card-body h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--accent-color);
+        }
+
+        .card-body p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        /* 影片與地圖區塊 */
+        .media-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .media-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .responsive-embed {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 比例 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .responsive-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* 數據統計區塊 */
+        .stats {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px 20px;
+            margin: 60px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item h4 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+
+        .stat-item p {
+            color: var(--text-muted);
+        }
+
+        /* 頁尾 */
+        footer {
+            background-color: #090d16;
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 導覽列 -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">中正大學 <span>CCU</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">關於中正</a></li>
+                <li><a href="#colleges">學院特色</a></li>
+                <li><a href="#media">影音地圖</a></li>
+                <li><a href="#contact">聯絡資訊</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero 主視覺 -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>國立臺灣中正大學</h1>
+            <p>兼具學術卓越與人文關懷的綜合型大學，坐落於嘉義民雄，擁有廣闊宜人的校園景色與前瞻科研實力。</p>
+            <div class="btn-group">
+                <a href="https://www.ccu.edu.tw" target="_blank" class="btn btn-primary">進入官方網站</a>
+                <a href="#media" class="btn btn-outline">觀看校園影片</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- 數據統計 -->
+        <section class="stats">
+            <div class="stat-item">
+                <h4>7</h4>
+                <p>主要學術學院</p>
+            </div>
+            <div class="stat-item">
+                <h4>130+</h4>
+                <p>公頃廣闊校地</p>
+            </div>
+            <div class="stat-item">
+                <h4>11,000+</h4>
+                <p>在校學生人數</p>
+            </div>
+            <div class="stat-item">
+                <h4>TOP</h4>
+                <p>前瞻學術研究中心</p>
+            </div>
+        </section>
+
+        <!-- 關於中正 -->
+        <section id="about" style="margin-bottom: 60px;">
+            <h2 class="section-title">關於中正大學</h2>
+            <div style="background-color: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 12px; color: #cbd5e1;">
+                <p style="margin-bottom: 15px;">
+                    國立中正大學於 1989 年在嘉義民雄創校，為紀念蔣中正先生而創立，是臺灣建校規劃相當完整的綜合型大學。校區佔地廣達 130 餘公頃，以著名的噴水池、噴泉大道、黃花風鈴木步道以及紅磚建築群著稱，景色優美，吸引許多影視作品前往取景。
+                </p>
+                <p>
+                    學校秉持「積極創新、修德澤人」之校訓，擁有文學院、理學院、社會科學院、工學院、管理學院、法學院及教育學院等七大學院，並積極推動跨領域整合、國際學術交流與產學合作，深耕前瞻科技與地方永續發展。
+                </p>
+            </div>
+        </section>
+
+        <!-- 學院特色卡片 -->
+        <section id="colleges">
+            <h2 class="section-title">學院與校園特色</h2>
+            <div class="grid">
+                
+                <div class="card">
+                   <img src="https://www.tristarnews.com.tw/upload/imgDB/20260606223230Dn1r.jpg" alt="校園特色" class="card-img">
+                    <div class="card-body">
+                        <h3>頂尖學術研究</h3>
+                        <p>工學院與理學院在 AI、資安、材料科技與精密機械領域享譽國際；社科院與法學院則是中部法政研究之重鎮。</p>
+                        <a href="https://www.ccu.edu.tw/p/412-1000-792.php?Lang=zh-tw" target="_blank" class="btn btn-outline" style="padding: 6px 16px; font-size: 0.85rem;">了解學院</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://cmn-hant.overseas.ncnu.edu.tw/wp-content/uploads/2022/09/ccu.webp" alt="美麗校園" class="card-img">
+                    <div class="card-body">
+                        <h3>優美綠意校園</h3>
+                        <p>校內廣植綠樹，花季時黃花風鈴木盛開景色宜人。擁有全台大學少見的高爾夫球練習場與標準體育設施。</p>
+                        <a href="https://ccu-navigation.ccu.edu.tw/p/426-1253-1.php?Lang=zh-tw" target="_blank" class="btn btn-outline" style="padding: 6px 16px; font-size: 0.85rem;">校園景點</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://www.civilmedia.tw/wp-content/uploads/2019/06/62453375_2506360116050049_1014031311750299648_n.jpg" alt="多元學生生活" class="card-img">
+                    <div class="card-body">
+                        <h3>多元學生社團</h3>
+                        <p>擁有百餘個學術、藝文、體育與服務性社團，定期辦理紫荊祭、紫荊影展與各類跨校交流活動。</p>
+                        <a href="https://extra.ccu.edu.tw/p/404-1035-5862.php?Lang=zh-tw" target="_blank" class="btn btn-outline" style="padding: 6px 16px; font-size: 0.85rem;">探索生活</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 影音與地圖 -->
+        <section id="media" style="margin-top: 60px;">
+            <h2 class="section-title">影音導覽與地理位置</h2>
+            <div class="media-grid">
+                
+                <!-- 嵌入影片 -->
+                <div>
+                    <h3 style="margin-bottom: 15px; color: var(--accent-color);">🎬 中正大學簡介影片</h3>
+                    <div class="responsive-embed">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/KXCB0GmRVeA?si=ryqeBJeXXRZzuzqc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- 嵌入地圖 -->
+                <div>
+                    <h3 style="margin-bottom: 15px; color: var(--accent-color);">📍 校區位置 (嘉義縣民雄鄉)</h3>
+                    <div class="responsive-embed">
+                       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.2746622368163!2d120.4692784756264!3d23.55857697880174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346ebe56d7077847%3A0x1ea97cc03ed110a4!2z5ZyL56uL5Lit5q2j5aSn5a24!5e0!3m2!1szh-TW!2stw!4v1791204238542!5m2!1szh-TW!2stw" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾資訊 -->
+    <footer id="contact">
+        <p><strong>國立臺灣中正大學 National Chung Cheng University</strong></p>
+        <p>電話:05-2720411</p>
+        <p>地址：嘉義縣民雄鄉大學路一段168號</p>
+        
+    </footer>
+
+</body>
+</html>
